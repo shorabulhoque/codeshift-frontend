@@ -1,3 +1,6 @@
+import { User, CandidateProfile, RecruiterProfile, RecruiterProfileVersion, Account } from "@/types/models";
+
+
 export interface RegisterPayload {
     email: string;
     password: string;
@@ -33,30 +36,20 @@ export interface ChangePasswordPayload {
     newPassword: string;
 }
 
-export type UserRole = "ADMIN" | "CANDIDATE" | "RECRUITER";
-
 export interface SwitchRolePayload {
     targetRole: "CANDIDATE" | "RECRUITER";
 }
 
-export interface CandidateProfile {
-    id: string;
-    fullName: string;
-    avatar?: string | null;
+export interface CurrentUser extends User {
+    candidateProfile?: Omit<CandidateProfile, "userId"> | null;
+    recruiterProfile?: (RecruiterProfile & {
+        currentVersion?: Omit<RecruiterProfileVersion, "recruiterProfileId"> | null;
+    }) | null;
+    accounts?: Omit<Account, "userId" | "providerId">[];
 }
 
-export interface RecruiterProfile {
-    id: string;
-    companyName: string;
-}
-
-export interface CurrentUser {
-    id: string;
-    email: string;
-    roles: UserRole[];
-    activeRole: UserRole;
-    status: "ACTIVE" | "BLOCKED" | "PENDING";
-    isEmailVerified: boolean;
-    candidateProfile?: CandidateProfile | null;
-    recruiterProfile?: RecruiterProfile | null;
+export interface LoginResponseData {
+    accessToken: string;
+    refreshToken: string;
+    activeRole?: "CANDIDATE" | "RECRUITER" | "ADMIN";
 }

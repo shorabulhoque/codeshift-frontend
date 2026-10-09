@@ -10,13 +10,10 @@ import type {
     SwitchRolePayload,
     VerifyEmailPayload,
     CurrentUser,
+    LoginResponseData,
 } from "./types";
+import { ApiResponse } from "@/types/api.type";
 
-interface ApiResponse<T = null> {
-    success: boolean;
-    message: string;
-    data: T;
-}
 
 export const authApi = {
     register: (payload: RegisterPayload) =>
@@ -32,13 +29,13 @@ export const authApi = {
         }),
 
     login: (payload: LoginPayload) =>
-        apiClient<ApiResponse>("/auth/login", {
+        apiClient<ApiResponse<LoginResponseData>>("/auth/login", {
             method: "POST",
             body: payload,
         }),
 
     googleLogin: (payload: GoogleLoginPayload) =>
-        apiClient<ApiResponse>("/auth/google", {
+        apiClient<ApiResponse<LoginResponseData>>("/auth/google", {
             method: "POST",
             body: payload,
         }),

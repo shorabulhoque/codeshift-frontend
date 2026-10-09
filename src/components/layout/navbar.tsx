@@ -1,26 +1,30 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useState } from "react";
+import Logo from "@/assets/svg/Logo";
+import { Button } from "@/components/ui/button";
+import { useAuthUser } from "@/features/auth/hooks";
+import { UserDropdown } from "./user-dropdown";
+import { buttonVariants } from "@/components/ui/button";
 
 export function Navbar() {
+    const { data: user, isLoading } = useAuthUser();
 
     const routes = [
         { name: "Home", url: "/" },
         { name: "Jobs", url: "/jobs" },
         { name: "About", url: "/about" },
         { name: "Contact", url: "/contact" },
-    ]
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    ];
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
 
-                {/* Left: Logo and Mobile Menu */}
+                {/* Left: Logo */}
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center space-x-2">
+                        <Logo />
                         <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
                             CodeShift
                         </span>
@@ -40,14 +44,19 @@ export function Navbar() {
                     ))}
                 </nav>
 
-                {/* Right: Auth Button or Profile Icon */}
+                {/* Right: Auth Action */}
                 <div className="flex items-center space-x-4">
-                    {isLoggedIn ? (
-                        "user"
+                    {isLoading ? (
+                        <div className="size-9 rounded-full bg-muted animate-pulse" />
+                    ) : user ? (
+                        <UserDropdown user={user} />
                     ) : (
-                        <Button size="sm" className="bg-blue-600">
+                        <Link
+                            href="/login"
+                            className={buttonVariants({ size: "sm", className: "bg-blue-600 hover:bg-blue-700" })}
+                        >
                             Login
-                        </Button>
+                        </Link>
                     )}
                 </div>
 

@@ -15,6 +15,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { CurrentUser } from "@/features/auth/types";
+import { useLogout } from "@/features/auth/hooks";
 
 interface UserDropdownProps {
     user: CurrentUser;
@@ -22,6 +23,7 @@ interface UserDropdownProps {
 
 export function UserDropdown({ user }: UserDropdownProps) {
     const router = useRouter();
+    const { mutate: logout, isPending } = useLogout();
 
     const getInitials = (name?: string) => {
         if (!name) return "U";
@@ -38,7 +40,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
         : "/dashboard";
 
     const handleLogout = async () => {
-        router.push("/login");
+        logout();
     };
 
     return (
@@ -86,6 +88,7 @@ export function UserDropdown({ user }: UserDropdownProps) {
                 >
                     <LogOut className="mr-2 size-4" />
                     <span>Log out</span>
+                    <span>{isPending ? "Logging out..." : "Log out"}</span>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

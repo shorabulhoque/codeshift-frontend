@@ -115,3 +115,17 @@ export function useSwitchRole() {
         },
     });
 }
+
+export function useLogout() {
+    const queryClient = useQueryClient();
+    const router = useRouter();
+
+    return useMutation({
+        mutationFn: () => authApi.logout(),
+        onSuccess: () => {
+            queryClient.clear();
+            router.push("/login");
+            router.refresh();
+        },
+    });
+}

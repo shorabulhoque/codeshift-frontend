@@ -29,7 +29,7 @@ export const authApi = {
         }),
 
     login: (payload: LoginPayload) =>
-        apiClient<ApiResponse<LoginResponseData>>("/auth/login", {
+        apiClient<ApiResponse>("/auth/login", {
             method: "POST",
             body: payload,
         }),
@@ -69,8 +69,13 @@ export const authApi = {
         }),
 
     switchRole: (payload: SwitchRolePayload) =>
-        apiClient<ApiResponse>("/auth/switch-role", {
+        apiClient<ApiResponse<LoginResponseData>>("/auth/switch-role", {
             method: "POST",
             body: payload,
+        }),
+
+    logout: () =>
+        apiClient<ApiResponse>("/auth/logout", {
+            method: "POST",
         }),
 };

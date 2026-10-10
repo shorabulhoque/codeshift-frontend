@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "@/assets/svg/Logo";
-import { Button } from "@/components/ui/button";
+// import Logo from "@/assets/svg/Logo";
 import { useAuthUser } from "@/features/auth/hooks";
 import { UserDropdown } from "./user-dropdown";
 import { buttonVariants } from "@/components/ui/button";
+import Logo from "../shared/logo";
 
 export function Navbar() {
     const { data: user, isLoading } = useAuthUser();
@@ -25,9 +25,9 @@ export function Navbar() {
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center space-x-2">
                         <Logo />
-                        <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+                        {/* <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
                             CodeShift
-                        </span>
+                        </span> */}
                     </Link>
                 </div>
 

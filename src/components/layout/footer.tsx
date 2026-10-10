@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "@/assets/svg/Logo";
+// import Logo from "@/assets/svg/Logo";
+import Logo from "../shared/logo";
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -36,9 +37,9 @@ export function Footer() {
                     <div className="space-y-4 md:col-span-1">
                         <Link href="/" className="flex items-center space-x-2">
                             <Logo />
-                            <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+                            {/* <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
                                 CodeShift
-                            </span>
+                            </span> */}
                         </Link>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                             Connecting world-class engineering talent with high-growth technology companies worldwide.

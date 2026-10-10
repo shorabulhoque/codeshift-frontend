@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/toast";
+import GoogleLoginButton from "./google-login-button";
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -170,6 +171,7 @@ export default function LoginForm() {
                         Register
                     </Link>
                 </div>
+                <GoogleLoginButton />
             </CardContent>
         </Card>
     );
